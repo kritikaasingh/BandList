@@ -4,4 +4,4 @@ const sequelize = new Sequelize('BandList', 'kritika', '123456', {
   storage: './db.sqlite3'
 })
 
-module.exports = sequelize 
+module.exports = sequelize

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const bcrypt = require('bcrypt-nodejs')
+const db = require('./sequelize')
 
 const User = db.define('users', {
     id: {
@@ -77,3 +78,11 @@ const Band = db.define('bands', {
         }
     })
     Band.belongsTo(User); 
+
+    db.sync()
+    .then(() => console.log("Database has been synced"))
+    .catch((err) => console.error("Error creating database"))
+
+exports = module.exports = {
+    User,Band
+} 
