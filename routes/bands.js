@@ -48,7 +48,8 @@ route.get('/', (req, res) => {
                 }
             })
                 .then((bands) => {
-                    res.status(200).send(bands);
+                    //res.status(200).send(bands);
+                      res.render('home', {bands})
                 })
                 .catch((err) => {
                     console.log(err);
@@ -65,26 +66,28 @@ route.get('/', (req, res) => {
         }
 }) 
 
-route.delete('/delete', (req, res) => {
+route.post('/:Id', (req, res) => {
+        console.log("yooo");
+        console.log(req.params.Id);
         if (req.session.user) {
             Band.destroy({
                 where: {
                     userId: req.session.user.id,
-                    name:req.body.name,
+                    id: req.params.Id
                 }
             })
                 .then((band) => {
-                    res.send("Removed Successfully");
+                    res.send("removed successfully");
                 })
                 .catch((err) => {
-                    res.send("Some Error Occured!!!")
+                    res.send("some error occured!!!")
                 })
         }
         else {
             res.status(501).send({
-                error: "User Not Logged In"
+                error: "user not logged in"
             })
         }
-}) 
+    }) 
 
 exports = module.exports = route 

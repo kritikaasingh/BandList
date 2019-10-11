@@ -3,45 +3,48 @@ const route = require('express').Router()
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-route.post('/signin', (req, res) => {
-    User.findOne({
-        where: {
-            email: req.body.email
-        }
-    })
-        .then((users) => {
-            if (users) {
-                if (!bcrypt.compareSync(req.body.password, users.password)) {
-                    req.session.user = null;
-                    return res.status(401).send({
-                        title: 'Login failed',
-                        error: { message: 'Invalid login credentials' }
-                    });
-                }
-                console.log(users["dataValues"].id);
-                req.session.user = users;
-                // var token = jwt.sign({ user: users }, 'secret', { expiresIn: 720000 });
-                res.status(200).send({
-                    message: 'Successfully logged in',
-                    //token: token,
-                    userId: users["dataValues"].id
-                });
-            }
+route.post('/signin', (req, res) => {
+    console.log(req.body);
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    })
+        .then((users) => {
+            console.log("hell");
+            if (users) {
+                if (!bcrypt.compareSync(req.body.password, users.password)) {
+                    req.session.user = null;
+                    return res.status(401).send({
+                        title: 'Login failed',
+                        error: { message: 'Invalid login credentials' }
+                    });
+                }
+               console.log(users["dataValues"].id);
+                req.session.user = users;
+                res.redirect('/bands/');
+               // res.render('home');
+                // var token = jwt.sign({ user: users }, 'secret', { expiresIn: 720000 });
+                // res.status(200).send({
+                //     message: 'Successfully logged in',
+                //     //token: token,
+                //     userId: users["dataValues"].id
+                // });
+            }
 
-            else
-            {
-                req.session.user = null;
-                res.status(500).send({
-                    error: "Invalid email or password"
-                })
-            }
-        })
-        .catch((err) => {
-            req.session.user = null;
-            res.status(500).send({
-                error: "Invalid email or password"
-            })
-        })
+            else {
+                req.session.user = null;
+                res.status(500).send({
+                    error: "Invalid email or password"
+                })
+            }
+        })
+        .catch((err) => {
+            req.session.user = null;
+            res.status(500).send({
+                error: "Invalid email or password"
+            })
+        })
 
 })
 
@@ -94,5 +97,14 @@ route.get('/isloggedin', function (req, res) {
         done:false,
     })
 })
+  
+route.get('/signin', (req, res) => {
+    if (req.session.user) {
+        res.render('home');
+    } else {
+        res.render("login");
+    }
+}); 
+ 
 
 exports = module.exports = route
