@@ -2,42 +2,70 @@
 <html lang="en">
 
 <head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
 </head>
+
 <body style="width: 100%; height: 100%; padding: 0; margin: 0;">
-    <div style="background-color: blueviolet; height: 50px; width: 100%">
-        <span style=" font-size: 30px; color: white; padding: 15px;">MyBand</span>
-        <span><a href="/users/logout">Logout</a></span>
+    <div class="col s12" style="background-color: #2ebfac; height: 70px; width: 100%">
+        <div class="row">
+            <div class="col s1"></div>
+        <div class="col s8" style=" font-size: 30px; color: white; padding: 15px;">MY BANDS</div>
+        <div class="col s2" style="padding: 20px; color:azure">Hello! {{user.name}}</div>
+        <div style="padding: 20px;"><a style="color:azure" href="/users/logout">Logout</a></div>
+        </div>
     </div>
     <br>
     <br>
-    <form action="/bands/create" method="POST">
-        Band Name: <input type="text" name="name"> <br>
-        <input type="submit" value="Add Band">
+    <form class="col s12" action="/bands/create" method="POST">
+        <div class="row">
+            <div class="col s3"></div>
+            <div class="input-field col s5">
+                <input id="band_name" name="name" type="text" class="validate">
+                <label for="band_name">Band Name:</label>
+            </div>
+            <div class="col s2">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add Band</button>
+            </div>
+        </div>
     </form>
 
     <br>
     <br><br>
     <br>
-    <tbody>
+    <ul class="collection">
         {{#bands}}
-        <tr>
-            <td>{{name}}
-                <form action="/bands/edit/{{id}}" method="PATCH">
-                    <button type="Submit">Edit</button>
-                </form>
-                <form action="/bands/{{id}}" method="POST">
-                    <button type="Submit" name="Delete">Delete</button>
-                </form>
-            </td>
-            <br>
-        </tr>
+        <div class="row collection-item">
+            <div class="col s3"></div>
+            <li class="">
+                <div class="col s5">{{name}}</div>
+                <div class="col s1">
+                    <form action="/bands/edit/{{id}}/{{name}}" method="GET">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Edit</button>
+                    </form>
+                </div>
+                <div class="col s2">
+                    <form action="/bands/{{id}}" method="POST">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Delete</button>
+                    </form>
+                </div>
+
+                <br>
+            </li>
+        </div>
         {{/bands}}
-    </tbody>
+    </ul>
 </body>
 
 </html>

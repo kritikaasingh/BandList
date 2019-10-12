@@ -1,20 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <form action="/users/signup" method="POST">
-  Name: <input type="text" name="name"> <br>
-  College/Company: <input type="text" name="college"> <br>
-  Date Of Birth: <input type="date" name="dob"> <br>
-  Email: <input type="email" name="email">
-  Password: <input type="password" name="password"> <br>
-  <input type="submit" >
-  </form>
 
+<head>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body style="width: 100%; height: 100%; padding: 0; margin: 0;">
+    <div class="row" style="padding: 0; margin: 0;">
+        <div class="input-field col s6" style=" height: 100vh; background-image: url('https://wallpaperplay.com/walls/full/4/5/4/175698.jpg'); 
+        background-size: contain; background-size: cover; padding: 0; margin: 0; background-repeat: no-repeat;">
+        </div>
+        <div class="input-field col s6">
+            
+            <form class="col s12" action="/users/signup" method="POST">
+                <div class="row">
+                    
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="first_name" name="name" type="text" class="validate">
+                        <label for="first_name">Full Name</label>
+                    </div>
+                     <div class="input-field col s6">
+                        <h3 style="font-weight: bold; padding:0; margin:0; text-align: center; color:blueviolet;">SIGN UP</h3>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">school</i>
+                        <input id="college_name" type="text" name="college" class="validate">
+                        <label for="college_name">College</label>
+                    </div>
+                   
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="email" name="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">security</i>
+                        <input id="password" type="password" name="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s1">
+                        <i class="material-icons right">today</i>
+                    </div>
+                    <div class="input-field col s11">
+                        <input id="dob" type="date" name="dob" class="validate">
+                        <label for="dob">Date Of Birth</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Sign Up
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+            
+            <div class="row">
+                <div class="input-field col s4">
+                </div>
+                <div class="input-field col s4">
+                </div>
+                <div class="input-field col s4">
+                    <a class="btn-floating btn-large waves-effect waves-light indigo" href="/users/signin" style="width:150px; border-radius: 50px;">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
